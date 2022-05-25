@@ -17,7 +17,6 @@ public class SearchingAndSorting {
         }
         return str;
     }
-
     // Binary search method to search word
     private static int binarySearch(String[] str1, String search) {
 
