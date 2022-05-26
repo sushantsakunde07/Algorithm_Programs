@@ -1,61 +1,48 @@
 package com.bridgelabz;
 
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class SearchingAndSorting {
-    // Bubble sorting
-    private static String[] sortArray(String[] str) {
-        String temp;
-        for (int i = 0; i < str.length; i++) {
-            for (int j = 0; j < str.length - 1 - i; j++) {
-                if (str[j].compareTo(str[j + 1]) > 0) {
-                    temp = str[j];
-                    str[j] = str[j + 1];
-                    str[j + 1] = temp;
+    public void insertionSort(String[] arr) {
+        int length = arr.length;
+        for (int i = 1; i < length; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    String temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
         }
-        return str;
-    }
-    // Binary search method to search word
-    private static int binarySearch(String[] str1, String search) {
-
-        int start = 0, size = str1.length - 1;
-        while (start <= size) {
-            int mid = start + (size - start) / 2;
-            int res = search.compareTo(str1[mid]);
-
-            // Check if search word is present at mid
-            if (res == 0)
-                return mid;
-            // If search word greater, ignore left half
-            if (res > 0)
-                start = mid + 1;
-                // If search word is smaller, ignore right half
-            else
-                size = mid - 1;
-        }
-        return -1;
     }
 
     public static void main(String[] args) {
-        System.out.println("------------- Welcome to Binary Search Program -----------");
+        System.out.println("--------- Welcome to Insertion Sort Program -----------");
         System.out.println();
+        Scanner sc = new Scanner(System.in);
 
-        String[] inputArr = {"TCS", "Infosys", "Bridgelabz", "Wipro", "Bajaj"};
-        System.out.println("\nBefore sorting:" + Arrays.toString(inputArr));
+        SearchingAndSorting sort = new SearchingAndSorting();
+        System.out.println("Enter how many Strings you want to sort : ");
+        int size = sc.nextInt();
+        String[] array = new String[size];
 
-        // sort string
-        String[] sortedArr = sortArray(inputArr);
-        System.out.println("\nAfter sorting:" + Arrays.toString(sortedArr));
+        System.out.println("Enter words to sort : ");
+        for (int i = 0; i < array.length; i++) {
+            array[i] = sc.next();
+        }
 
-        // word to search in string
-        String search = "Bridgelabz";
-        int result = binarySearch(sortedArr, search);
+        // Print original array
+        System.out.print("\nArray before sorting : ");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + ", ");
+        }
+        System.out.println("\n");
 
-        if (result == -1)
-            System.out.println("\n" + search + " = Word not present in String");
-        else
-            System.out.println("\n" + search + " = Word found in String after sorting at index: " + result);
+        // calling insertionSort sort method
+        sort.insertionSort(array);
+        System.out.print("Array after sorting : ");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + ", ");
+        }
     }
 }
