@@ -1,14 +1,15 @@
 package com.bridgelabz;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class SearchingAndSorting {
-    public void insertionSort(String[] arr) {
-        int length = arr.length;
-        for (int i = 1; i < length; i++) {
-            for (int j = i - 1; j >= 0; j--) {
-                if (arr[j].compareTo(arr[j + 1]) > 0) {
-                    String temp = arr[j];
+
+    public static void bubbleSort(int[] arr) {
+        int temp;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
@@ -17,18 +18,17 @@ public class SearchingAndSorting {
     }
 
     public static void main(String[] args) {
-        System.out.println("--------- Welcome to Insertion Sort Program -----------");
+        System.out.println("-------- Welcome to Bubble Sort Program -----------");
         System.out.println();
         Scanner sc = new Scanner(System.in);
 
-        SearchingAndSorting sort = new SearchingAndSorting();
-        System.out.println("Enter how many Strings you want to sort : ");
+        System.out.println("Enter how many number you want to sort : ");
         int size = sc.nextInt();
-        String[] array = new String[size];
+        int[] array = new int[size];
 
-        System.out.println("Enter words to sort : ");
+        System.out.println("Enter numbers to sort : ");
         for (int i = 0; i < array.length; i++) {
-            array[i] = sc.next();
+            array[i] = sc.nextInt();
         }
 
         // Print original array
@@ -38,8 +38,8 @@ public class SearchingAndSorting {
         }
         System.out.println("\n");
 
-        // calling insertionSort sort method
-        sort.insertionSort(array);
+        // calling bubble sort method
+        bubbleSort(array);
         System.out.print("Array after sorting : ");
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + ", ");
