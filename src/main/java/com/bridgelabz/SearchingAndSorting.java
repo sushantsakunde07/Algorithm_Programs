@@ -1,84 +1,41 @@
 package com.bridgelabz;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class SearchingAndSorting {
 
-    static void merge(int arr[], int l, int m, int r) {
-        /* Find sizes of two subarrays to be merged */
-        int length1 = m - l + 1;
-        int length2 = r - m;
+    public static void checkAnagram(char[] str1, char[] str2) {
+        int str_1length = str1.length;
+        int str_2Length = str2.length;
+        boolean check = true;
 
-        /* Create temp arrays */
-        int L[] = new int[length1];
-        int R[] = new int[length2];
-
-        /* Copy data to temp arrays */
-        for (int i = 0; i < length1; ++i)
-            L[i] = arr[l + i];
-        for (int j = 0; j < length2; ++j)
-            R[j] = arr[m + 1 + j];
-
-        /* Merge the temp arrays */
-
-        /* Initial indexes of first and second subarrays */
-        int i = 0, j = 0;
-
-        /* Initial index of merged subarry array */
-        int k = l;
-        while (i < length1 && j < length2) {
-            if (L[i] <= R[j]) {
-                arr[k] = L[i];
-                i++;
-            } else {
-                arr[k] = R[j];
-                j++;
-            }
-            k++;
+        if (str_1length != str_2Length) {
+            System.out.println("The two strings are not anagram of each other");
+        } else {
+            Arrays.sort(str1);
+            Arrays.sort(str2);
+            for (int i = 0; i < str_1length; i++)
+                if (str1[i] != str2[i]) {
+                    check = false;
+                }
+            if (check)
+                System.out.println("The two strings are anagram of each other !");
+            else
+                System.out.println("The two strings are not  anagram of each other !");
         }
-
-        /* Copy remaining elements of L[] if any */
-        while (i < length1) {
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
-
-        /* Copy remaining elements of R[] if any */
-        while (j < length2) {
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
-    }
-
-    // Method to sort the array
-    static void sort(int arr[], int l, int r) {
-        if (l < r) {
-            // Find the middle point
-            int m = (l + r) / 2;
-
-            // Sort first and second halves
-            sort(arr, l, m);
-            sort(arr, m + 1, r);
-
-            // Merge the sorted halves
-            merge(arr, l, m, r);
-        }
-    }
-
-    /* function to print array of size length */
-    static void printArray(int arr[]) {
-        int length = arr.length;
-        for (int i = 0; i < length; ++i)
-            System.out.print(arr[i] + " ");
-        System.out.println();
     }
 
     public static void main(String args[]) {
-        int arr[] = {12, 11, 13, 5, 6, 7};
-        sort(arr, 0, arr.length - 1);
-        System.out.print("The Sorted Array is : ");
-        printArray(arr);
+        System.out.println("------------ Welcome To Anagram Program -------------");
+        System.out.println();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter First String : ");
+        String firstStr = sc.next();
+        System.out.println("Enter Second String : ");
+        String secondStr = sc.next();
+
+        checkAnagram(firstStr.toCharArray(), secondStr.toCharArray());
     }
 }
